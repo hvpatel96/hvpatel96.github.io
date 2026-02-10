@@ -12,14 +12,14 @@
         }
 
         :root {
-            --bg-color: #0a0e12;
-            --bg-secondary: #111821;
-            --accent-color: #00d4aa;
-            --accent-hover: #00b894;
-            --text-primary: #e8f4f8;
-            --text-secondary: #8b9dc3;
-            --border-color: #1e3a5f;
-            --card-bg: #0d1117;
+            --bg-color: #fafbfc;
+            --bg-secondary: #f0f4f8;
+            --accent-color: #0d9488;
+            --accent-hover: #0f766e;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
         }
 
         body {
@@ -30,7 +30,7 @@
             min-height: 100vh;
         }
 
-        /* Animated Background */
+        /* Animated Background - Cell Division */
         .hero-bg {
             position: fixed;
             top: 0;
@@ -39,37 +39,111 @@
             height: 600px;
             z-index: -1;
             overflow: hidden;
+            background: linear-gradient(180deg, #f0f9ff 0%, #fafbfc 100%);
         }
 
-        .hero-bg::before {
-            content: '';
+        .cell-container {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(0, 180, 220, 0.05) 0%, transparent 50%),
-                linear-gradient(180deg, rgba(0, 212, 170, 0.03) 0%, transparent 100%);
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
         }
 
-        .grid-overlay {
+        .cell {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(13, 148, 136, 0.15), rgba(13, 148, 136, 0.05));
+            border: 1px solid rgba(13, 148, 136, 0.1);
+            animation: cellDivide 12s ease-in-out infinite;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        .cell:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .cell:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .cell:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .cell:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .cell:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            top: 30%;
+            left: 45%;
+            animation-delay: 3s;
+        }
+
+        .cell:nth-child(6) {
+            width: 70px;
+            height: 70px;
+            top: 75%;
+            left: 30%;
+            animation-delay: 5s;
+        }
+
+        .cell:nth-child(7) {
+            width: 50px;
+            height: 50px;
+            top: 15%;
+            left: 85%;
+            animation-delay: 6s;
+        }
+
+        .cell:nth-child(8) {
+            width: 110px;
+            height: 110px;
+            top: 70%;
+            left: 60%;
+            animation-delay: 7s;
+        }
+
+        @keyframes cellDivide {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            25% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.4;
+                box-shadow: 
+                    inset -10px -10px 20px rgba(13, 148, 136, 0.1),
+                    20px 0 0 -5px rgba(13, 148, 136, 0.1),
+                    -20px 0 0 -5px rgba(13, 148, 136, 0.1);
+            }
+            75% {
+                transform: scale(0.9);
+                opacity: 0.7;
+            }
         }
 
         /* Container */
@@ -199,7 +273,7 @@
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.1);
+            box-shadow: 0 8px 32px rgba(13, 148, 136, 0.15);
         }
 
         /* Terminal Bar */
@@ -359,7 +433,7 @@
 
         .btn-primary {
             background: var(--accent-color);
-            color: var(--bg-color);
+            color: #ffffff;
         }
 
         .btn-primary:hover {
@@ -410,7 +484,7 @@
             top: -40px;
             left: 0;
             background: var(--accent-color);
-            color: var(--bg-color);
+            color: #ffffff;
             padding: 8px;
             text-decoration: none;
             z-index: 100;
@@ -427,7 +501,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--accent-color);
-            color: var(--bg-color);
+            color: #ffffff;
             padding: 12px 24px;
             border-radius: 8px;
             font-size: 14px;
@@ -435,7 +509,7 @@
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
         }
 
         .clipboard-toast.show {
@@ -449,7 +523,16 @@
     <div id="clipboard-toast" class="clipboard-toast">Copied to clipboard!</div>
     
     <div class="hero-bg">
-        <div class="grid-overlay"></div>
+        <div class="cell-container">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
     </div>
 
     <div class="container">
