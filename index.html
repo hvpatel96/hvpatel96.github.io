@@ -40,7 +40,7 @@
             min-height: 100%;
             z-index: -1;
             overflow: hidden;
-            background: linear-gradient(180deg, #f0f9ff 0%, #fafbfc 100%);
+            background: linear-gradient(180deg, #faf9f7 0%, #f0f4f8 50%, #f5f3f0 100%);
         }
 
         .cell-container {
@@ -49,133 +49,380 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.6;
+            opacity: 1;
+        }
+
+        /* SVG Connections Layer */
+        .connections-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .cell-wrapper {
+            position: absolute;
+            transition: transform 0.15s ease-out;
+            will-change: transform;
         }
 
         .cell {
-            position: absolute;
+            position: relative;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(13, 148, 136, 0.15), rgba(13, 148, 136, 0.05));
-            border: 1px solid rgba(13, 148, 136, 0.1);
-            animation: cellDivide 12s ease-in-out infinite;
         }
 
-        .cell:nth-child(1) {
+        /* Background Layer - Furthest, slowest */
+        .cell-bg {
+            opacity: 0.25;
+            transform: scale(0.7);
+            background: radial-gradient(circle at 30% 30%, rgba(236, 72, 153, 0.12), rgba(236, 72, 153, 0.04));
+            border: 1px solid rgba(236, 72, 153, 0.08);
+        }
+
+        /* Midground Layer */
+        .cell-mid {
+            opacity: 0.45;
+            transform: scale(0.9);
+            background: radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.13), rgba(139, 92, 246, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        /* Foreground Layer - Closest, fastest */
+        .cell-fg {
+            opacity: 0.65;
+            transform: scale(1);
+            background: radial-gradient(circle at 30% 30%, rgba(13, 148, 136, 0.18), rgba(13, 148, 136, 0.06));
+            border: 1px solid rgba(13, 148, 136, 0.12);
+        }
+
+        /* Cell Positioning with unique drift animations */
+        .cell-wrapper:nth-child(1) {
             width: 120px;
             height: 120px;
             top: 10%;
             left: 15%;
-            animation-delay: 0s;
+        }
+        .cell-wrapper:nth-child(1) .cell {
+            animation: drift1 22s ease-in-out infinite, cellPulse 15s ease-in-out infinite;
+            animation-delay: 0s, 3s;
         }
 
-        .cell:nth-child(2) {
+        .cell-wrapper:nth-child(2) {
             width: 80px;
             height: 80px;
             top: 20%;
             left: 70%;
-            animation-delay: 2s;
+        }
+        .cell-wrapper:nth-child(2) .cell {
+            animation: drift2 26s ease-in-out infinite, cellDivide 35s ease-in-out infinite;
+            animation-delay: 2s, 8s;
         }
 
-        .cell:nth-child(3) {
+        .cell-wrapper:nth-child(3) {
             width: 100px;
             height: 100px;
             top: 50%;
             left: 10%;
-            animation-delay: 4s;
+        }
+        .cell-wrapper:nth-child(3) .cell {
+            animation: drift3 24s ease-in-out infinite, cellPulse 18s ease-in-out infinite;
+            animation-delay: 4s, 5s;
         }
 
-        .cell:nth-child(4) {
+        .cell-wrapper:nth-child(4) {
             width: 60px;
             height: 60px;
             top: 60%;
             left: 80%;
-            animation-delay: 1s;
+        }
+        .cell-wrapper:nth-child(4) .cell {
+            animation: drift4 20s ease-in-out infinite, cellDivide 28s ease-in-out infinite;
+            animation-delay: 1s, 12s;
         }
 
-        .cell:nth-child(5) {
+        .cell-wrapper:nth-child(5) {
             width: 90px;
             height: 90px;
             top: 30%;
             left: 45%;
-            animation-delay: 3s;
+        }
+        .cell-wrapper:nth-child(5) .cell {
+            animation: drift5 23s ease-in-out infinite, cellPulse 16s ease-in-out infinite;
+            animation-delay: 3s, 7s;
         }
 
-        .cell:nth-child(6) {
+        .cell-wrapper:nth-child(6) {
             width: 70px;
             height: 70px;
             top: 75%;
             left: 30%;
-            animation-delay: 5s;
+        }
+        .cell-wrapper:nth-child(6) .cell {
+            animation: drift6 25s ease-in-out infinite, cellDivide 32s ease-in-out infinite;
+            animation-delay: 5s, 15s;
         }
 
-        .cell:nth-child(7) {
+        .cell-wrapper:nth-child(7) {
             width: 50px;
             height: 50px;
             top: 15%;
             left: 85%;
-            animation-delay: 6s;
+        }
+        .cell-wrapper:nth-child(7) .cell {
+            animation: drift7 21s ease-in-out infinite, cellPulse 14s ease-in-out infinite;
+            animation-delay: 6s, 9s;
         }
 
-        .cell:nth-child(8) {
+        .cell-wrapper:nth-child(8) {
             width: 110px;
             height: 110px;
             top: 70%;
             left: 60%;
-            animation-delay: 7s;
+        }
+        .cell-wrapper:nth-child(8) .cell {
+            animation: drift8 27s ease-in-out infinite, cellDivide 38s ease-in-out infinite;
+            animation-delay: 7s, 20s;
         }
 
-        .cell:nth-child(9) {
+        .cell-wrapper:nth-child(9) {
             width: 85px;
             height: 85px;
             top: 85%;
             left: 20%;
-            animation-delay: 8s;
+        }
+        .cell-wrapper:nth-child(9) .cell {
+            animation: drift9 19s ease-in-out infinite, cellPulse 17s ease-in-out infinite;
+            animation-delay: 8s, 11s;
         }
 
-        .cell:nth-child(10) {
+        .cell-wrapper:nth-child(10) {
             width: 65px;
             height: 65px;
             top: 90%;
             left: 75%;
-            animation-delay: 9s;
+        }
+        .cell-wrapper:nth-child(10) .cell {
+            animation: drift10 24s ease-in-out infinite, cellDivide 30s ease-in-out infinite;
+            animation-delay: 9s, 18s;
         }
 
-        .cell:nth-child(11) {
+        .cell-wrapper:nth-child(11) {
             width: 95px;
             height: 95px;
             top: 40%;
             left: 90%;
-            animation-delay: 10s;
+        }
+        .cell-wrapper:nth-child(11) .cell {
+            animation: drift11 22s ease-in-out infinite, cellPulse 19s ease-in-out infinite;
+            animation-delay: 10s, 6s;
         }
 
-        .cell:nth-child(12) {
+        .cell-wrapper:nth-child(12) {
             width: 75px;
             height: 75px;
             top: 5%;
             left: 50%;
-            animation-delay: 11s;
+        }
+        .cell-wrapper:nth-child(12) .cell {
+            animation: drift12 26s ease-in-out infinite, cellDivide 33s ease-in-out infinite;
+            animation-delay: 11s, 14s;
         }
 
-        @keyframes cellDivide {
+        /* Particle System */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: brownian linear infinite;
+        }
+
+        .particle.teal { background: rgba(13, 148, 136, 0.6); }
+        .particle.pink { background: rgba(236, 72, 153, 0.5); }
+        .particle.purple { background: rgba(139, 92, 246, 0.5); }
+        .particle.cream { background: rgba(250, 249, 247, 0.7); }
+
+        /* Individual particle positions and animations */
+        .particle:nth-child(1) { top: 15%; left: 25%; animation: brownian1 35s linear infinite; }
+        .particle:nth-child(2) { top: 35%; left: 65%; animation: brownian2 42s linear infinite; }
+        .particle:nth-child(3) { top: 55%; left: 15%; animation: brownian3 38s linear infinite; }
+        .particle:nth-child(4) { top: 25%; left: 85%; animation: brownian4 45s linear infinite; }
+        .particle:nth-child(5) { top: 75%; left: 45%; animation: brownian5 33s linear infinite; }
+        .particle:nth-child(6) { top: 45%; left: 35%; animation: brownian6 40s linear infinite; }
+        .particle:nth-child(7) { top: 65%; left: 75%; animation: brownian7 37s linear infinite; }
+        .particle:nth-child(8) { top: 85%; left: 20%; animation: brownian8 43s linear infinite; }
+        .particle:nth-child(9) { top: 10%; left: 55%; animation: brownian9 36s linear infinite; }
+        .particle:nth-child(10) { top: 50%; left: 90%; animation: brownian10 41s linear infinite; }
+        .particle:nth-child(11) { top: 30%; left: 10%; animation: brownian11 39s linear infinite; }
+        .particle:nth-child(12) { top: 70%; left: 60%; animation: brownian12 44s linear infinite; }
+        .particle:nth-child(13) { top: 20%; left: 40%; animation: brownian13 34s linear infinite; }
+        .particle:nth-child(14) { top: 80%; left: 80%; animation: brownian14 46s linear infinite; }
+        .particle:nth-child(15) { top: 40%; left: 50%; animation: brownian15 38s linear infinite; }
+
+        /* Drift Animations - Organic floating motion */
+        @keyframes drift1 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            25% { transform: translate(20px, -15px) scale(0.72); }
+            50% { transform: translate(10px, 10px) scale(0.68); }
+            75% { transform: translate(-15px, 5px) scale(0.71); }
+        }
+
+        @keyframes drift2 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            33% { transform: translate(-18px, 12px) scale(0.92); }
+            66% { transform: translate(8px, -8px) scale(0.88); }
+        }
+
+        @keyframes drift3 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            25% { transform: translate(15px, 20px) scale(0.93); }
+            50% { transform: translate(-10px, 5px) scale(0.87); }
+            75% { transform: translate(5px, -15px) scale(0.91); }
+        }
+
+        @keyframes drift4 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            50% { transform: translate(-12px, -10px) scale(0.73); }
+        }
+
+        @keyframes drift5 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            20% { transform: translate(10px, -20px) scale(0.94); }
+            40% { transform: translate(-15px, 8px) scale(0.86); }
+            60% { transform: translate(5px, 15px) scale(0.92); }
+            80% { transform: translate(-8px, -5px) scale(0.89); }
+        }
+
+        @keyframes drift6 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            33% { transform: translate(18px, -8px) scale(0.72); }
+            66% { transform: translate(-12px, 12px) scale(0.68); }
+        }
+
+        @keyframes drift7 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            25% { transform: translate(-20px, 10px) scale(0.93); }
+            50% { transform: translate(15px, -5px) scale(0.87); }
+            75% { transform: translate(-5px, -12px) scale(0.91); }
+        }
+
+        @keyframes drift8 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            40% { transform: translate(12px, 18px) scale(0.74); }
+            80% { transform: translate(-15px, -8px) scale(0.69); }
+        }
+
+        @keyframes drift9 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            50% { transform: translate(-10px, 15px) scale(0.93); }
+        }
+
+        @keyframes drift10 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            25% { transform: translate(15px, -12px) scale(0.73); }
+            75% { transform: translate(-8px, 8px) scale(0.68); }
+        }
+
+        @keyframes drift11 {
+            0%, 100% { transform: translate(0, 0) scale(0.9); }
+            33% { transform: translate(-15px, -15px) scale(0.94); }
+            66% { transform: translate(10px, 5px) scale(0.86); }
+        }
+
+        @keyframes drift12 {
+            0%, 100% { transform: translate(0, 0) scale(0.7); }
+            20% { transform: translate(8px, 20px) scale(0.72); }
+            40% { transform: translate(-18px, -5px) scale(0.68); }
+            60% { transform: translate(12px, -15px) scale(0.74); }
+            80% { transform: translate(-5px, 10px) scale(0.69); }
+        }
+
+        /* Cell Pulse - Breathing animation */
+        @keyframes cellPulse {
             0%, 100% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            25% {
-                transform: scale(1.1);
-                opacity: 0.8;
+                opacity: var(--base-opacity, 0.6);
+                transform: scale(var(--base-scale, 1));
             }
             50% {
-                transform: scale(1.2);
-                opacity: 0.4;
-                box-shadow: 
-                    inset -10px -10px 20px rgba(13, 148, 136, 0.1),
-                    20px 0 0 -5px rgba(13, 148, 136, 0.1),
-                    -20px 0 0 -5px rgba(13, 148, 136, 0.1);
+                opacity: calc(var(--base-opacity, 0.6) * 1.2);
+                transform: scale(calc(var(--base-scale, 1) * 1.05));
             }
-            75% {
-                transform: scale(0.9);
-                opacity: 0.7;
+        }
+
+        /* Cell Division Animation */
+        @keyframes cellDivide {
+            0%, 100% {
+                border-radius: 50%;
+                box-shadow: none;
+            }
+            20% {
+                border-radius: 50%;
+                box-shadow: inset -5px 0 15px rgba(13, 148, 136, 0.1);
+            }
+            40% {
+                border-radius: 45% 45% 55% 55% / 40% 40% 60% 60%;
+                box-shadow: 
+                    inset -8px 0 20px rgba(13, 148, 136, 0.15),
+                    inset 8px 0 20px rgba(236, 72, 153, 0.1);
+            }
+            50% {
+                border-radius: 40% 40% 60% 60% / 35% 35% 65% 65%;
+                box-shadow: 
+                    inset -12px 0 25px rgba(13, 148, 136, 0.2),
+                    inset 12px 0 25px rgba(236, 72, 153, 0.15),
+                    0 0 0 -10px rgba(13, 148, 136, 0.1),
+                    0 0 0 -10px rgba(236, 72, 153, 0.1);
+            }
+            60% {
+                border-radius: 50%;
+                box-shadow: 
+                    -15px 0 0 -8px rgba(13, 148, 136, 0.12),
+                    15px 0 0 -8px rgba(236, 72, 153, 0.1);
+            }
+            80% {
+                box-shadow: 
+                    -25px 0 0 -5px rgba(13, 148, 136, 0.08),
+                    25px 0 0 -5px rgba(236, 72, 153, 0.08);
+            }
+        }
+
+        /* Brownian Motion - Random walk */
+        @keyframes brownian1 { 0% { transform: translate(0, 0); opacity: 0.5; } 25% { transform: translate(80px, -40px); opacity: 0.7; } 50% { transform: translate(120px, 20px); opacity: 0.4; } 75% { transform: translate(40px, 60px); opacity: 0.6; } 100% { transform: translate(0, 0); opacity: 0.5; } }
+        @keyframes brownian2 { 0% { transform: translate(0, 0); opacity: 0.4; } 25% { transform: translate(-60px, 50px); opacity: 0.6; } 50% { transform: translate(-100px, -30px); opacity: 0.3; } 75% { transform: translate(-20px, -70px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.4; } }
+        @keyframes brownian3 { 0% { transform: translate(0, 0); opacity: 0.6; } 25% { transform: translate(90px, 30px); opacity: 0.4; } 50% { transform: translate(60px, -50px); opacity: 0.7; } 75% { transform: translate(130px, -20px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.6; } }
+        @keyframes brownian4 { 0% { transform: translate(0, 0); opacity: 0.5; } 25% { transform: translate(-80px, -60px); opacity: 0.7; } 50% { transform: translate(-40px, 40px); opacity: 0.4; } 75% { transform: translate(-120px, 80px); opacity: 0.6; } 100% { transform: translate(0, 0); opacity: 0.5; } }
+        @keyframes brownian5 { 0% { transform: translate(0, 0); opacity: 0.4; } 25% { transform: translate(50px, -80px); opacity: 0.6; } 50% { transform: translate(100px, -40px); opacity: 0.3; } 75% { transform: translate(70px, -100px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.4; } }
+        @keyframes brownian6 { 0% { transform: translate(0, 0); opacity: 0.6; } 25% { transform: translate(-50px, 70px); opacity: 0.4; } 50% { transform: translate(-90px, 30px); opacity: 0.7; } 75% { transform: translate(-30px, 90px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.6; } }
+        @keyframes brownian7 { 0% { transform: translate(0, 0); opacity: 0.5; } 25% { transform: translate(70px, 60px); opacity: 0.7; } 50% { transform: translate(30px, 100px); opacity: 0.4; } 75% { transform: translate(100px, 40px); opacity: 0.6; } 100% { transform: translate(0, 0); opacity: 0.5; } }
+        @keyframes brownian8 { 0% { transform: translate(0, 0); opacity: 0.4; } 25% { transform: translate(-70px, -50px); opacity: 0.6; } 50% { transform: translate(-30px, -90px); opacity: 0.3; } 75% { transform: translate(-100px, -30px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.4; } }
+        @keyframes brownian9 { 0% { transform: translate(0, 0); opacity: 0.6; } 25% { transform: translate(60px, 80px); opacity: 0.4; } 50% { transform: translate(20px, 40px); opacity: 0.7; } 75% { transform: translate(80px, 60px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.6; } }
+        @keyframes brownian10 { 0% { transform: translate(0, 0); opacity: 0.5; } 25% { transform: translate(-90px, 20px); opacity: 0.7; } 50% { transform: translate(-50px, -60px); opacity: 0.4; } 75% { transform: translate(-110px, -20px); opacity: 0.6; } 100% { transform: translate(0, 0); opacity: 0.5; } }
+        @keyframes brownian11 { 0% { transform: translate(0, 0); opacity: 0.4; } 25% { transform: translate(40px, -70px); opacity: 0.6; } 50% { transform: translate(80px, -30px); opacity: 0.3; } 75% { transform: translate(20px, -90px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.4; } }
+        @keyframes brownian12 { 0% { transform: translate(0, 0); opacity: 0.6; } 25% { transform: translate(-40px, 50px); opacity: 0.4; } 50% { transform: translate(-80px, 10px); opacity: 0.7; } 75% { transform: translate(-20px, 70px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.6; } }
+        @keyframes brownian13 { 0% { transform: translate(0, 0); opacity: 0.5; } 25% { transform: translate(100px, 40px); opacity: 0.7; } 50% { transform: translate(60px, 80px); opacity: 0.4; } 75% { transform: translate(120px, 20px); opacity: 0.6; } 100% { transform: translate(0, 0); opacity: 0.5; } }
+        @keyframes brownian14 { 0% { transform: translate(0, 0); opacity: 0.4; } 25% { transform: translate(-60px, -40px); opacity: 0.6; } 50% { transform: translate(-20px, -80px); opacity: 0.3; } 75% { transform: translate(-80px, -20px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.4; } }
+        @keyframes brownian15 { 0% { transform: translate(0, 0); opacity: 0.6; } 25% { transform: translate(80px, -60px); opacity: 0.4; } 50% { transform: translate(40px, -20px); opacity: 0.7; } 75% { transform: translate(100px, -40px); opacity: 0.5; } 100% { transform: translate(0, 0); opacity: 0.6; } }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .cell, .particle {
+                animation: none !important;
             }
         }
 
@@ -555,19 +802,53 @@
     <div id="clipboard-toast" class="clipboard-toast">Copied to clipboard!</div>
     
     <div class="hero-bg">
-        <div class="cell-container">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+        <!-- SVG Connections Layer -->
+        <svg class="connections-layer" id="connections-layer" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:rgba(13, 148, 136, 0.3);stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:rgba(236, 72, 153, 0.2);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgba(139, 92, 246, 0.3);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+
+        <!-- Cells Container -->
+        <div class="cell-container" id="cell-container">
+            <!-- Background Layer (4 cells) -->
+            <div class="cell-wrapper" data-layer="bg"><div class="cell cell-bg"></div></div>
+            <div class="cell-wrapper" data-layer="bg"><div class="cell cell-bg"></div></div>
+            <div class="cell-wrapper" data-layer="bg"><div class="cell cell-bg"></div></div>
+            <div class="cell-wrapper" data-layer="bg"><div class="cell cell-bg"></div></div>
+            <!-- Midground Layer (4 cells) -->
+            <div class="cell-wrapper" data-layer="mid"><div class="cell cell-mid"></div></div>
+            <div class="cell-wrapper" data-layer="mid"><div class="cell cell-mid"></div></div>
+            <div class="cell-wrapper" data-layer="mid"><div class="cell cell-mid"></div></div>
+            <div class="cell-wrapper" data-layer="mid"><div class="cell cell-mid"></div></div>
+            <!-- Foreground Layer (4 cells) -->
+            <div class="cell-wrapper" data-layer="fg"><div class="cell cell-fg"></div></div>
+            <div class="cell-wrapper" data-layer="fg"><div class="cell cell-fg"></div></div>
+            <div class="cell-wrapper" data-layer="fg"><div class="cell cell-fg"></div></div>
+            <div class="cell-wrapper" data-layer="fg"><div class="cell cell-fg"></div></div>
+        </div>
+
+        <!-- Particle System (15 particles) -->
+        <div class="particles-container">
+            <div class="particle teal"></div>
+            <div class="particle pink"></div>
+            <div class="particle purple"></div>
+            <div class="particle teal"></div>
+            <div class="particle cream"></div>
+            <div class="particle pink"></div>
+            <div class="particle purple"></div>
+            <div class="particle teal"></div>
+            <div class="particle cream"></div>
+            <div class="particle pink"></div>
+            <div class="particle purple"></div>
+            <div class="particle teal"></div>
+            <div class="particle cream"></div>
+            <div class="particle pink"></div>
+            <div class="particle purple"></div>
         </div>
     </div>
 
@@ -797,6 +1078,109 @@
                 toast.classList.remove('show');
             }, 2000);
         }
+
+        // Mouse Repulsion Effect
+        let mouseX = 0, mouseY = 0;
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+        const repulsionRadius = 200; // Distance at which repulsion starts
+        const repulsionStrength = 25; // Maximum pixels to move away
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Apply repulsion to cell wrappers based on distance from mouse
+        function updateRepulsion() {
+            const wrappers = document.querySelectorAll('.cell-wrapper');
+            wrappers.forEach(wrapper => {
+                const rect = wrapper.getBoundingClientRect();
+                const cellCenterX = rect.left + rect.width / 2;
+                const cellCenterY = rect.top + rect.height / 2;
+                
+                // Calculate distance from mouse to cell center
+                const dx = cellCenterX - mouseX;
+                const dy = cellCenterY - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                let offsetX = 0;
+                let offsetY = 0;
+                
+                // Apply repulsion if mouse is close enough
+                if (distance < repulsionRadius && distance > 0) {
+                    // Calculate repulsion strength (stronger when closer)
+                    const force = (1 - distance / repulsionRadius) * repulsionStrength;
+                    
+                    // Normalize direction and apply force
+                    offsetX = (dx / distance) * force;
+                    offsetY = (dy / distance) * force;
+                }
+                
+                wrapper.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+
+            requestAnimationFrame(updateRepulsion);
+        }
+
+        // Cell Connections - Draw lines between nearby cells
+        function updateConnections() {
+            const svg = document.getElementById('connections-layer');
+            const wrappers = document.querySelectorAll('.cell-wrapper');
+            const connectionDistance = 180; // px
+            
+            // Clear existing lines
+            svg.innerHTML = svg.innerHTML.split('</defs>')[0] + '</defs>';
+            
+            // Get cell positions
+            const cellPositions = Array.from(wrappers).map(wrapper => {
+                const rect = wrapper.getBoundingClientRect();
+                return {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2,
+                    element: wrapper
+                };
+            });
+
+            // Draw connections
+            for (let i = 0; i < cellPositions.length; i++) {
+                for (let j = i + 1; j < cellPositions.length; j++) {
+                    const dx = cellPositions[i].x - cellPositions[j].x;
+                    const dy = cellPositions[i].y - cellPositions[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - distance / connectionDistance) * 0.4;
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', cellPositions[i].x);
+                        line.setAttribute('y1', cellPositions[i].y);
+                        line.setAttribute('x2', cellPositions[j].x);
+                        line.setAttribute('y2', cellPositions[j].y);
+                        line.setAttribute('stroke', 'url(#connectionGradient)');
+                        line.setAttribute('stroke-width', '1');
+                        line.setAttribute('stroke-opacity', opacity);
+                        line.setAttribute('stroke-dasharray', '5,5');
+                        svg.appendChild(line);
+                    }
+                }
+            }
+        }
+
+        // Update connections periodically (less frequent for performance)
+        setInterval(updateConnections, 100);
+
+        // Initialize
+        window.addEventListener('load', () => {
+            updateConnections();
+            requestAnimationFrame(updateRepulsion);
+        });
+
+        // Update on resize
+        window.addEventListener('resize', () => {
+            windowWidth = window.innerWidth;
+            windowHeight = window.innerHeight;
+            updateConnections();
+        });
     </script>
 </body>
 </html>
