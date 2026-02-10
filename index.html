@@ -132,6 +132,21 @@
             text-decoration: underline;
         }
 
+        .email-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        .email-btn:hover {
+            text-decoration: underline;
+        }
+
         .highlight {
             color: var(--accent-color);
             font-weight: 600;
@@ -394,10 +409,34 @@
         .skip-link:focus {
             top: 0;
         }
+
+        /* Clipboard notification */
+        .clipboard-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+        }
+
+        .clipboard-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <a href="#projects" class="skip-link">Skip to projects</a>
+    <div id="clipboard-toast" class="clipboard-toast">Copied to clipboard!</div>
     
     <div class="hero-bg">
         <div class="grid-overlay"></div>
@@ -406,12 +445,11 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <p class="tagline">Software Engineer | Full Stack Developer</p>
+                <p class="tagline">Translational Scientist | Software Enthusiast</p>
                 <h1>Harsh Patel</h1>
                 <p class="description">
-                    I'm a passionate software engineer with expertise in building scalable web applications, 
-                    distributed systems, and cloud-native solutions. I love solving complex problems and 
-                    creating elegant, efficient code that makes a difference.
+                    I'm a translation scientist with expertise in building scalable web applications. 
+                    I love solving complex problems and creating elegant, user-friendly solutions that make a difference.
                 </p>
                 <p class="teaser">
                     Interested in collaborating or have an interesting project? Let's connect!
@@ -420,9 +458,9 @@
                     <a href="https://github.com/hvpatel96" target="_blank" rel="noopener noreferrer">
                         github: <span class="highlight">@hvpatel96</span>
                     </a><br>
-                    <a href="mailto:hvpatel96@gmail.com">
-                        email: <span class="highlight">hvpatel96@gmail.com</span>
-                    </a>
+                    <button class="email-btn" onclick="copyEmail()">
+                        email: <span class="highlight">harshpatel1996@gmail.com</span>
+                    </button>
                 </p>
             </div>
         </header>
@@ -586,6 +624,25 @@
                 heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         });
+
+        // Copy email to clipboard
+        function copyEmail() {
+            const email = 'harshpatel1996@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Failed to copy email:', err);
+            });
+        }
+
+        // Show clipboard toast notification
+        function showToast() {
+            const toast = document.getElementById('clipboard-toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
     </script>
 </body>
 </html>
