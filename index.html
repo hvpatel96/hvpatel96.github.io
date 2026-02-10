@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Patel // Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0a0e12;
+            --bg-secondary: #111821;
+            --accent-color: #00d4aa;
+            --accent-hover: #00b894;
+            --text-primary: #e8f4f8;
+            --text-secondary: #8b9dc3;
+            --border-color: #1e3a5f;
+            --card-bg: #0d1117;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 600px;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 180, 220, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(0, 212, 170, 0.03) 0%, transparent 100%);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 120px 0 80px;
+        }
+
+        .header-content {
+            max-width: 700px;
+        }
+
+        .tagline {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .teaser {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .meta a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Section */
+        section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            header {
+                padding: 80px 0 60px;
+            }
+        }
+
+        /* Project Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.1);
+        }
+
+        /* Terminal Bar */
+        .termbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .termbar-title {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .termbar-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .termbar-title a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Badge */
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-transform: lowercase;
+        }
+
+        .badge[data-type="open-source"] {
+            background: rgba(0, 212, 170, 0.15);
+            color: var(--accent-color);
+        }
+
+        .badge[data-type="closed-source"] {
+            background: rgba(139, 157, 195, 0.15);
+            color: var(--text-secondary);
+        }
+
+        .badge[data-type="personal"] {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+        }
+
+        /* Media */
+        .media {
+            aspect-ratio: 16/9;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .media img {
+            transform: scale(1.02);
+        }
+
+        .media-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--card-bg) 100%);
+            font-size: 48px;
+            color: var(--border-color);
+        }
+
+        /* Content */
+        .content {
+            padding: 20px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-desc a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .card-desc a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tech Badges */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tech-badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent-color);
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* Links */
+        .links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            margin: 0 12px;
+            color: var(--border-color);
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#projects" class="skip-link">Skip to projects</a>
+    
+    <div class="hero-bg">
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <p class="tagline">Software Engineer | Full Stack Developer</p>
+                <h1>Harsh Patel</h1>
+                <p class="description">
+                    I'm a passionate software engineer with expertise in building scalable web applications, 
+                    distributed systems, and cloud-native solutions. I love solving complex problems and 
+                    creating elegant, efficient code that makes a difference.
+                </p>
+                <p class="teaser">
+                    Interested in collaborating or have an interesting project? Let's connect!
+                </p>
+                <p class="meta">
+                    <a href="https://github.com/hvpatel96" target="_blank" rel="noopener noreferrer">
+                        github: <span class="highlight">@hvpatel96</span>
+                    </a><br>
+                    <a href="mailto:hvpatel96@gmail.com">
+                        email: <span class="highlight">hvpatel96@gmail.com</span>
+                    </a>
+                </p>
+            </div>
+        </header>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="card">
+                    <div class="termbar">
+                        <h3 class="termbar-title">
+                            <a href="#" target="_blank">Portfolio Website</a>
+                        </h3>
+                        <span class="badge" data-type="open-source">open source</span>
+                    </div>
+                    <div class="media">
+                        <div class="media-placeholder">🌐</div>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle">Personal portfolio and blog platform</p>
+                        <p class="card-desc">
+                            A modern, responsive portfolio website built with clean HTML, CSS, and vanilla JavaScript. 
+                            Features dark theme, smooth animations, and optimized performance.
+                        </p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">html</span>
+                            <span class="tech-badge">css</span>
+                            <span class="tech-badge">javascript</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" class="btn btn-primary" target="_blank">View Live</a>
+                            <a href="#" class="btn btn-ghost" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="card">
+                    <div class="termbar">
+                        <h3 class="termbar-title">
+                            <a href="#" target="_blank">Task Manager API</a>
+                        </h3>
+                        <span class="badge" data-type="open-source">open source</span>
+                    </div>
+                    <div class="media">
+                        <div class="media-placeholder">⚡</div>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle">RESTful API for task management</p>
+                        <p class="card-desc">
+                            A robust REST API built with Node.js and Express, featuring authentication, 
+                            task CRUD operations, and real-time updates via WebSocket.
+                        </p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">nodejs</span>
+                            <span class="tech-badge">express</span>
+                            <span class="tech-badge">mongodb</span>
+                            <span class="tech-badge">websocket</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" class="btn btn-primary" target="_blank">View Project</a>
+                            <a href="#" class="btn btn-ghost" target="_blank">Documentation</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="card">
+                    <div class="termbar">
+                        <h3 class="termbar-title">
+                            <a href="#" target="_blank">Data Visualizer</a>
+                        </h3>
+                        <span class="badge" data-type="personal">personal</span>
+                    </div>
+                    <div class="media">
+                        <div class="media-placeholder">📊</div>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle">Interactive data visualization dashboard</p>
+                        <p class="card-desc">
+                            An interactive dashboard for visualizing complex datasets. Built with React and D3.js, 
+                            featuring customizable charts, filters, and export capabilities.
+                        </p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">react</span>
+                            <span class="tech-badge">d3.js</span>
+                            <span class="tech-badge">typescript</span>
+                            <span class="tech-badge">tailwind</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" class="btn btn-primary" target="_blank">Live Demo</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="card">
+                    <div class="termbar">
+                        <h3 class="termbar-title">
+                            <a href="#" target="_blank">Weather App</a>
+                        </h3>
+                        <span class="badge" data-type="personal">personal</span>
+                    </div>
+                    <div class="media">
+                        <div class="media-placeholder">🌤️</div>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle">Real-time weather tracking application</p>
+                        <p class="card-desc">
+                            A beautiful weather application that provides real-time forecasts, 
+                            location-based alerts, and historical weather data visualization.
+                        </p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">react</span>
+                            <span class="tech-badge">api</span>
+                            <span class="tech-badge">css</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" class="btn btn-primary" target="_blank">Try it Out</a>
+                            <a href="#" class="btn btn-ghost" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <span>Built with passion and clean code</span>
+                <span class="separator">·</span>
+                <a href="https://github.com/hvpatel96" target="_blank" rel="noopener noreferrer">
+                    GitHub: <strong>@hvpatel96</strong>
+                </a>
+                <span class="separator">·</span>
+                <a href="#top">Back to top</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle parallax effect to hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
