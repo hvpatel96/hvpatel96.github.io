@@ -36,14 +36,15 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 600px;
+            height: 100vh;
+            min-height: 100%;
             z-index: -1;
             overflow: hidden;
             background: linear-gradient(180deg, #f0f9ff 0%, #fafbfc 100%);
         }
 
         .cell-container {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -121,6 +122,38 @@
             top: 70%;
             left: 60%;
             animation-delay: 7s;
+        }
+
+        .cell:nth-child(9) {
+            width: 85px;
+            height: 85px;
+            top: 85%;
+            left: 20%;
+            animation-delay: 8s;
+        }
+
+        .cell:nth-child(10) {
+            width: 65px;
+            height: 65px;
+            top: 90%;
+            left: 75%;
+            animation-delay: 9s;
+        }
+
+        .cell:nth-child(11) {
+            width: 95px;
+            height: 95px;
+            top: 40%;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        .cell:nth-child(12) {
+            width: 75px;
+            height: 75px;
+            top: 5%;
+            left: 50%;
+            animation-delay: 11s;
         }
 
         @keyframes cellDivide {
@@ -532,6 +565,10 @@
             <div class="cell"></div>
             <div class="cell"></div>
             <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
         </div>
     </div>
 
@@ -716,15 +753,6 @@
                     });
                 }
             });
-        });
-
-        // Add subtle parallax effect to hero background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg) {
-                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
         });
 
         // Copy email to clipboard
