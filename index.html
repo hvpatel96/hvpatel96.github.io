@@ -251,6 +251,16 @@
             color: #ffc107;
         }
 
+        .badge[data-type="journal"] {
+            background: rgba(156, 39, 176, 0.15);
+            color: #ce93d8;
+        }
+
+        .badge[data-type="conference"] {
+            background: rgba(33, 150, 243, 0.15);
+            color: #90caf9;
+        }
+
         /* Media */
         .media {
             aspect-ratio: 16/9;
@@ -528,60 +538,69 @@
                     </div>
                 </article>
 
-                <!-- Project 3 -->
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2 class="section-title">Publications</h2>
+            
+            <div class="projects-grid">
+                <!-- Publication 1 -->
                 <article class="card">
                     <div class="termbar">
                         <h3 class="termbar-title">
-                            <a href="#" target="_blank">Data Visualizer</a>
+                            <a href="#" target="_blank">Advancing Translational Medicine Through Machine Learning</a>
                         </h3>
-                        <span class="badge" data-type="personal">personal</span>
+                        <span class="badge" data-type="journal">journal</span>
                     </div>
                     <div class="media">
-                        <div class="media-placeholder">📊</div>
+                        <div class="media-placeholder">🧬</div>
                     </div>
                     <div class="content">
-                        <p class="subtitle">Interactive data visualization dashboard</p>
+                        <p class="subtitle">Journal of Translational Medicine, 2024</p>
                         <p class="card-desc">
-                            An interactive dashboard for visualizing complex datasets. Built with React and D3.js, 
-                            featuring customizable charts, filters, and export capabilities.
+                            A comprehensive review of machine learning applications in translational medicine, 
+                            focusing on predictive modeling for drug discovery and personalized treatment strategies. 
+                            This work bridges the gap between computational methods and clinical implementation.
                         </p>
                         <div class="tech-badges">
-                            <span class="tech-badge">react</span>
-                            <span class="tech-badge">d3.js</span>
-                            <span class="tech-badge">typescript</span>
-                            <span class="tech-badge">tailwind</span>
+                            <span class="tech-badge">machine learning</span>
+                            <span class="tech-badge">bioinformatics</span>
+                            <span class="tech-badge">clinical data</span>
                         </div>
                         <div class="links">
-                            <a href="#" class="btn btn-primary" target="_blank">Live Demo</a>
+                            <a href="#" class="btn btn-primary" target="_blank">Read Paper</a>
+                            <a href="#" class="btn btn-ghost" target="_blank">DOI</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 4 -->
+                <!-- Publication 2 -->
                 <article class="card">
                     <div class="termbar">
                         <h3 class="termbar-title">
-                            <a href="#" target="_blank">Weather App</a>
+                            <a href="#" target="_blank">Scalable Web Architectures for Healthcare Data</a>
                         </h3>
-                        <span class="badge" data-type="personal">personal</span>
+                        <span class="badge" data-type="conference">conference</span>
                     </div>
                     <div class="media">
-                        <div class="media-placeholder">🌤️</div>
+                        <div class="media-placeholder">🏥</div>
                     </div>
                     <div class="content">
-                        <p class="subtitle">Real-time weather tracking application</p>
+                        <p class="subtitle">IEEE International Conference on Healthcare Informatics, 2023</p>
                         <p class="card-desc">
-                            A beautiful weather application that provides real-time forecasts, 
-                            location-based alerts, and historical weather data visualization.
+                            Presentation of a novel architecture for handling large-scale healthcare data 
+                            with emphasis on security, interoperability, and real-time processing capabilities. 
+                            Demonstrates practical implementation strategies for modern health informatics systems.
                         </p>
                         <div class="tech-badges">
-                            <span class="tech-badge">react</span>
-                            <span class="tech-badge">api</span>
-                            <span class="tech-badge">css</span>
+                            <span class="tech-badge">web architecture</span>
+                            <span class="tech-badge">healthcare</span>
+                            <span class="tech-badge">data security</span>
                         </div>
                         <div class="links">
-                            <a href="#" class="btn btn-primary" target="_blank">Try it Out</a>
-                            <a href="#" class="btn btn-ghost" target="_blank">GitHub</a>
+                            <a href="#" class="btn btn-primary" target="_blank">View Presentation</a>
+                            <a href="#" class="btn btn-ghost" target="_blank">PDF</a>
                         </div>
                     </div>
                 </article>
